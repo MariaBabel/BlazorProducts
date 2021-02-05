@@ -12,8 +12,8 @@ namespace BlazorProducts.Server.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(nullable: false),
-                    Name = table.Column<string>(nullable: true),
-                    Supplier = table.Column<string>(nullable: true),
+                    Name = table.Column<string>(nullable: false),
+                    Supplier = table.Column<string>(nullable: false),
                     Price = table.Column<double>(nullable: false),
                     ImageUrl = table.Column<string>(nullable: true)
                 },

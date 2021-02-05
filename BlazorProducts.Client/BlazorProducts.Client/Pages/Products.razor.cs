@@ -16,8 +16,13 @@ namespace BlazorProducts.Client.Pages
         private ProductParameters _productParameters = new ProductParameters();
         [Inject]
         public IProductHttpRepository ProductRepo { get; set; }
+
+        [Inject]
+        public HttpInterceptorService Interceptor { get; set; }
+
         protected async override Task OnInitializedAsync()
         {
+            Interceptor.RegisterEvent();
             await GetProducts();
         }
 
@@ -47,5 +52,7 @@ namespace BlazorProducts.Client.Pages
             _productParameters.OrderBy = orderBy;
             await GetProducts();
         }
+
+        public void Dispose() => Interceptor.DisposeEvent();
     }
 }

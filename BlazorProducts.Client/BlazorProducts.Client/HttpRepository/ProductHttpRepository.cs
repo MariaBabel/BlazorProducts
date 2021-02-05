@@ -27,6 +27,7 @@ namespace BlazorProducts.Client.HttpRepository
                 ["searchTerm"] = productParameters.SearchTerm ?? "",
                 ["orderBy"] = productParameters.OrderBy
             };
+            
             var response = await _client.GetAsync(QueryHelpers.AddQueryString("products", queryStringParam));
             var content = await response.Content.ReadAsStringAsync();
             if (!response.IsSuccessStatusCode)
