@@ -1,14 +1,16 @@
-using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using System.Text;
-using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
-using Microsoft.Extensions.DependencyInjection;
-using System.Net.Http;
+using Blazored.LocalStorage;
+using BlazorProducts.Client.AuthProviders;
 using BlazorProducts.Client.HttpRepository;
 using Microsoft.AspNetCore.Components.Authorization;
-using BlazorProducts.Client.AuthProviders;
-using Blazored.LocalStorage;
+using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
+using System;
+using System.Collections.Generic;
+using System.Net.Http;
+using System.Text;
+using System.Threading.Tasks;
 using Toolbelt.Blazor.Extensions.DependencyInjection;
 
 namespace BlazorProducts.Client
@@ -34,6 +36,7 @@ namespace BlazorProducts.Client
             builder.Services.AddScoped<RefreshTokenService>();
             builder.Services.AddHttpClientInterceptor();
             builder.Services.AddScoped<HttpInterceptorService>();
+            //builder.Services.AddBlazorTable();
 
             await builder.Build().RunAsync();
         }

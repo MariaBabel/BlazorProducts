@@ -1,20 +1,22 @@
 ﻿@inherits LayoutComponentBase
 @using BlazorProducts.Client.Components
 
-<div class="sidebar">
-    <NavMenu />
-</div>
-
-<div class="main">
-    <div class="top-row px-4">
-        <AuthLinks />
+<div class="page">
+    <div class="sidebar">
+        <NavMenu />
     </div>
 
-    <div class="content px-4">
-        <CascadingValue Value="@_color">
-            @Body
-        </CascadingValue>
-    </div>
-</div>
+    <div class="main">
+        <div class="top-row px-4">
+            <AuthLinks />
+        </div>
 
-@code { private readonly string _color = "#0505b5"; }
+        <div class="content px-4">
+            <CascadingValue Value="@_color">
+                @Body
+            </CascadingValue>
+        </div>
+    </div>
+    </div>
+
+    @code { private readonly string _color = "#0505b5"; }
