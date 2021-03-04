@@ -23,6 +23,7 @@ namespace BlazorProducts.Client.Pages
         protected async override Task OnInitializedAsync()
         {
             Interceptor.RegisterEvent();
+            _productParameters.PageSize = 2;
             await GetProducts();
         }
 

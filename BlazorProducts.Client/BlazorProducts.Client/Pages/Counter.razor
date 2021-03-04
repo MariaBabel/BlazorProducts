@@ -1,4 +1,6 @@
 ﻿@page "/counter"
+@implements IDisposable
+@inject NavigationManager NavManager
 
 @using System.Security.Claims
 <AuthorizeView>
@@ -10,15 +12,41 @@
     </NotAuthorized>
 </AuthorizeView>
 
-<CounterPrint CurrentCount="currentCount" Title="Counter" />
+@*<CounterPrint CurrentCount="@currentCount" Title="Counter" />*@
+<p>Current count: @currentCount</p>
 
 <button class="btn btn-primary" @onclick="IncrementCount">Click me</button>
 
-@code { 
+<hr />
+
+<a href="/Counter?initialCount=10">Start counter at 10.</a> |
+<a href="/Counter?initialCount=20">Start counter at 20.</a> |
+<a href="/Counter?initialCount=30">Start counter at 30.</a>
+
+@code {
 
     private int currentCount = 0;
     [CascadingParameter]
     public Task<AuthenticationState> AuthState { get; set; }
+
+    protected override void OnInitialized()
+    {
+        GetQueryStringValues();
+        NavManager.LocationChanged += HandleLocationChanged;
+    }
+
+    void HandleLocationChanged(object sender, LocationChangedEventArgs e)
+    {
+        GetQueryStringValues();
+        StateHasChanged();
+    }
+
+    void GetQueryStringValues()
+    {
+        NavManager.TryGetQueryString<int>("initialCount", out currentCount);
+    }
+
+
     private async void IncrementCount()
     {
         var authState = await AuthState;
@@ -29,4 +57,9 @@
             currentCount--;
     }
 
+    public void Dispose()
+    {
+        NavManager.LocationChanged -= HandleLocationChanged;
     }
+
+}

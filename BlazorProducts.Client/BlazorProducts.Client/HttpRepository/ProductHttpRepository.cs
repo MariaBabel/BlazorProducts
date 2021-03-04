@@ -25,7 +25,8 @@ namespace BlazorProducts.Client.HttpRepository
             {
                 ["pageNumber"] = productParameters.PageNumber.ToString(),
                 ["searchTerm"] = productParameters.SearchTerm ?? "",
-                ["orderBy"] = productParameters.OrderBy
+                ["orderBy"] = productParameters.OrderBy,
+                ["pageSize"] = productParameters.PageSize.ToString()
             };
             
             var response = await _client.GetAsync(QueryHelpers.AddQueryString("products", queryStringParam));
